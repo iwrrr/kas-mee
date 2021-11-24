@@ -1,0 +1,79 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+/* Navbar */
+
+.navbar-bg {
+    height: 410px;
+    background-color: #32D689;
+}
+
+.navbar a.dropdown-toggle {
+    cursor: pointer;
+}
+
+.navbar a.dropdown-toggle:hover {
+    color: #fff;
+}
+
+.navbar a.dropdown-item i {
+    margin-top: 0.1px;
+}
+
+.navbar a.dropdown-item:hover {
+    background-color: #eafff5;
+}
+
+.navbar a.dropdown-item:focus,
+.navbar a.dropdown-item:active,
+.navbar a.dropdown-item.active {
+    background-color: #49e49b;
+    color: #fff !important;
+}
+
+/* Sidebar */
+
+.main-sidebar .sidebar-menu li.active a {
+    color: #32D689;
+    background-color: #eafff5;
+}
+
+.main-sidebar .sidebar-menu li a i {
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+body.sidebar-mini .main-sidebar .sidebar-menu li.active a {
+    box-shadow: 0 4px 8px #afffd8;
+    background-color: #32D689;
+}
+
+.sidebar-mini .main-sidebar .sidebar-menu li a i {
+    margin-right: 2px;
+}
+
+/* Statistic */
+
+.card.card-statistic-1 .card-icon {
+    line-height: 85px;
+}
+
+.card.card-statistic-1 .card-icon i {
+    font-size: 40px;
+    color: #fff;
+}
+
+.card.card-statistic-1 .card-header h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card.card-statistic-1 .card-body {
+    margin-top: 4px;
+}

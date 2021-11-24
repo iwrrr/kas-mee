@@ -1,0 +1,80 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+/* Welcome */
+
+body {
+    background-color: #fff;
+}
+
+.main-wrapper {
+    margin-top: 15%;
+}
+
+.navbar-bg {
+    height: 410px;
+    background-color: #32D689;
+}
+
+/* Login */
+
+.main-wrapper.login {
+    margin-top: 10%;
+    padding-top: 2%;
+}
+
+.main-wrapper.login .card {
+    padding: 0 10px 0 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-wrapper.login .form-label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main-wrapper.login .form-control,
+.main-wrapper.login .form-select,
+.main-wrapper.register .form-control,
+.main-wrapper.register .form-select {
+    height: 40px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.main-wrapper.login h3,
+.main-wrapper.register h3 {
+    font-weight: bold;
+    color: #333;
+}
+
+.main-wrapper.login a,
+.main-wrapper.register a {
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+}
+
+.main-wrapper.login p,
+.main-wrapper.register p {
+    font-size: 15px;
+    color: #888;
+}
+
+.main-wrapper.login p a,
+.main-wrapper.register p a {
+    font-size: 15px;
+    color: #4cb8c4;
+}
+
+.btn-custom {
+    margin: 0 auto 0 auto;
+    border-radius: 20px;
+}
