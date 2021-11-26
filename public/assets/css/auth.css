@@ -17,22 +17,42 @@ body {
     margin-top: 15%;
 }
 
+@media (max-width: 1366px) {
+    .main-wrapper {
+        margin-top: 20%;
+    }
+}
+
 .navbar-bg {
-    height: 410px;
+    height: 40%;
     background-color: #32D689;
 }
 
 /* Login */
+
+.illustration {
+    padding-left: 5%;
+}
 
 .main-wrapper.login {
     margin-top: 10%;
     padding-top: 2%;
 }
 
-.main-wrapper.login .card {
+.main-wrapper.register {
+    margin-top: 5%;
+    padding-top: 2%;
+}
+
+.main-wrapper.login .card,
+.main-wrapper.register .card {
     padding: 0 10px 0 10px;
     border-radius: 20px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-wrapper.register .card {
+    padding-bottom: 30px;
 }
 
 .main-wrapper.login .form-label {

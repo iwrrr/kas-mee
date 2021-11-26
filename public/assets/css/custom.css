@@ -10,7 +10,7 @@
 /* Navbar */
 
 .navbar-bg {
-    height: 410px;
+    height: 40%;
     background-color: #32D689;
 }
 
@@ -55,7 +55,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu li.active a {
 }
 
 .sidebar-mini .main-sidebar .sidebar-menu li a i {
-    margin-right: 2px;
+    margin-right: 1px;
 }
 
 /* Statistic */
