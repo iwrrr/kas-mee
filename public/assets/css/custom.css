@@ -7,6 +7,14 @@
 
 /*# sourceMappingURL=custom.css.map */
 
+/* General */
+
+.btn>i {
+    margin-top: 6px;
+    margin-left: 1px !important;
+    font-size: 15px;
+}
+
 /* Navbar */
 
 .navbar-bg {
@@ -76,4 +84,18 @@ body.sidebar-mini .main-sidebar .sidebar-menu li.active a {
 
 .card.card-statistic-1 .card-body {
     margin-top: 4px;
+}
+
+/* Content */
+
+.section .section-title {
+    color: #fff;
+}
+
+.section .section-title:before {
+    background-color: #fff;
+}
+
+.card .card-header h4 {
+    color: #32D689;
 }

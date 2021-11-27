@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,28 +30,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user', $this->data);
-    }
+        $this->data['users'] = User::orderBy('id', 'ASC')->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('pages.user.index', $this->data);
     }
 
     /**
@@ -68,7 +54,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['user'] = User::findOrFail($id);
+
+        return view('pages.user.edit', $this->data);
     }
 
     /**
@@ -78,9 +66,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $params = $request->validated();
+        $user = User::findOrFail($id);
+
+        return DB::transaction(function () use ($params, $user) {
+            $params['password'] = Hash::make($params['password']);
+
+            if (!$params['password']) {
+                unset($params['password']);
+            }
+
+            $user->update($params);
+
+            return redirect()->route('user.index')->with('success', 'User ' . $user->name . ' berhasil diperbarui');
+        });
+
+        return redirect()->route('user.index')->with('error', 'User ' . $user->name . ' gagal diperbarui');
     }
 
     /**
@@ -91,6 +94,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if ($user->roles == 'ADMIN') {
+            return redirect()->route('user.index')->with('error', 'Tidak dapat menghapus user dengan peran Admin!');
+        }
+
+        if ($user->name == Auth::user()->name) {
+            return redirect()->route('user.index')->with('error', 'Tidak dapat menghapus user yang sedang login!');
+        }
+
+        $user->delete();
+
+        return redirect()->route('user.index')->with('success', 'User ' . $user->name . 'berhasil dihapus');
     }
 }

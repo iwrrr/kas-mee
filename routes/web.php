@@ -26,7 +26,14 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('user', [UserController::class, 'index'])->name('user');
-    Route::get('kas', [CashController::class, 'index'])->name('kas');
-    Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
+
+    Route::get('user', [UserController::class, 'index'])->name('user.index');
+    Route::get('user/{id}/show', [UserController::class, 'show'])->name('user.show');
+    Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('user/{id}/update', [UserController::class, 'update'])->name('user.update');
+    Route::get('user/{id}/delete', [UserController::class, 'destroy'])->name('user.delete');
+
+    Route::get('kas', [CashController::class, 'index'])->name('kas.index');
+
+    Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
 });

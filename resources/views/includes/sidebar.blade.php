@@ -17,13 +17,13 @@
       </li>
       <li class="menu-header">Manajemen</li>
       <li class="nav-item {{ ($currentMenu == 'user') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('user') }}"><i class="bi-person"></i><span>User</span></a>
+        <a class="nav-link" href="{{ route('user.index') }}"><i class="bi-person"></i><span>User</span></a>
       </li>
       <li class="nav-item {{ ($currentMenu == 'kas') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('kas') }}"><i class="bi-journals"></i><span>Kas</span></a>
+        <a class="nav-link" href="{{ route('kas.index') }}"><i class="bi-journals"></i><span>Kas</span></a>
       </li>
       <li class="nav-item {{ ($currentMenu == 'transaksi') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('transaksi') }}"><i class="bi-currency-dollar"></i><span>Transaksi</span></a>
+        <a class="nav-link" href="{{ route('transaksi.index') }}"><i class="bi-currency-dollar"></i><span>Transaksi</span></a>
       </li>
     </ul>
   </aside>
