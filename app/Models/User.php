@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return Carbon::parse($value)->timestamp;
     }
+
+    public function kas()
+    {
+        return $this->hasMany(Kas::class, 'id_user');
+    }
 }

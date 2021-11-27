@@ -36,4 +36,5 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('kas', [CashController::class, 'index'])->name('kas.index');
 
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
+    Route::get('transaksi/{id}/show', [TransactionController::class, 'show'])->name('transaksi.show');
 });
