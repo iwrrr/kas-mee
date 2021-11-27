@@ -22,16 +22,6 @@ class Kas extends Model
         'target',
     ];
 
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->timestamp;
-    }
-
-    public function getUpdatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->timestamp;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');

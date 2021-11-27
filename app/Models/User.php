@@ -63,16 +63,6 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->timestamp;
-    }
-
-    public function getUpdatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->timestamp;
-    }
-
     public function kas()
     {
         return $this->hasMany(Kas::class, 'id_user');
