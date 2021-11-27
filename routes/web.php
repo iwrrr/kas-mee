@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('user/{id}/delete', [UserController::class, 'destroy'])->name('user.delete');
 
     Route::get('kas', [CashController::class, 'index'])->name('kas.index');
+    Route::get('kas/{id}/show', [CashController::class, 'show'])->name('kas.show');
 
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
     Route::get('transaksi/{id}/show', [TransactionController::class, 'show'])->name('transaksi.show');
