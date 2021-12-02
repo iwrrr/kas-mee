@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Kas;
+use App\Models\User;
 use App\Models\Transaksi;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Kas::factory(15)->create();
+        User::factory(1)->create();
+        Transaksi::factory(5)->create();
     }
 }

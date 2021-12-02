@@ -15,13 +15,13 @@ class CreateKasTable extends Migration
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('slug');
             $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_transaksi');
             $table->integer('target');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_transaksi')->references('id')->on('transaksi')->onDelete('cascade');
         });
     }
 

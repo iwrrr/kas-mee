@@ -17,8 +17,9 @@ class Kas extends Model
      * @var string[]
      */
     protected $fillable = [
+        'nama',
+        'slug',
         'id_user',
-        'id_transaksi',
         'target',
     ];
 
@@ -29,6 +30,6 @@ class Kas extends Model
 
     public function transaksi()
     {
-        return $this->hasMany(Transaksi::class, 'id_transaksi');
+        return $this->hasMany(Transaksi::class, 'id_kas');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CashController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
@@ -20,6 +21,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user', [UserController::class, 'updateProfile']);
     Route::post('user/photo', [UserController::class, 'uploadPhoto']);
     Route::post('logout', [UserController::class, 'logout']);
+
+    Route::get('cash', [CashController::class, 'all']);
+    Route::get('cash', [CashController::class, 'home']);
+    Route::get('cash/latest', [CashController::class, 'latest']);
+    Route::get('cash/{id}', [CashController::class, 'show']);
+    Route::post('cash', [CashController::class, 'store']);
+    Route::post('cash/{id}', [CashController::class, 'update']);
+    Route::delete('cash/{id}', [CashController::class, 'destroy']);
+
+    Route::get('transaction', [TransactionController::class, 'all']);
+    Route::get('transaction/latest', [TransactionController::class, 'latest']);
+    Route::get('transaction/today', [TransactionController::class, 'todayTransaction']);
+    Route::get('transaction/{id}', [TransactionController::class, 'transactionsByCash']);
+    Route::post('transaction', [TransactionController::class, 'store']);
+    Route::post('transaction/{id}', [TransactionController::class, 'update']);
+    Route::delete('transaction/{id}', [TransactionController::class, 'destroy']);
 });
 
 Route::post('login', [UserController::class, 'login']);

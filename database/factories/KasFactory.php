@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaksi;
 use App\Models\User;
+use App\Models\Transaksi;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class KasFactory extends Factory
@@ -15,13 +16,13 @@ class KasFactory extends Factory
      */
     public function definition()
     {
+        $nama = $this->faker->name();
+        $slug = Str::slug($nama, '-');
+
         return [
-            'id_user' => function () {
-                return User::factory()->create()->id;
-            },
-            'id_transaksi' => function () {
-                return Transaksi::factory()->create()->id;
-            },
+            'nama' => $nama,
+            'slug' => $slug,
+            'id_user' => User::all()->random()->id,
             'target' => $this->faker->numberBetween(1000000, 1100000),
         ];
     }

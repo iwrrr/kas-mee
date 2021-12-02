@@ -18,6 +18,7 @@ class Transaksi extends Model
      * @var string[]
      */
     protected $fillable = [
+        'id_kas',
         'pemasukan',
         'pengeluaran',
         'keuntungan',
@@ -25,6 +26,6 @@ class Transaksi extends Model
 
     public function kas()
     {
-        return $this->belongsTo(Kas::class, 'id_transaksi');
+        return $this->belongsTo(Kas::class, 'id_kas');
     }
 }

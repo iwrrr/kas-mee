@@ -22,8 +22,8 @@ Kas
               <table class="table table-bordered table-striped table-md">
                 <thead>
                   <th>#</th>
+                  <th>Nama Kas</th>
                   <th>User</th>
-                  <th>ID Transaksi</th>
                   <th>Target</th>
                   <th>Aksi</th>
                 </thead>
@@ -31,8 +31,8 @@ Kas
                   @forelse ($kas as $item)
                     <tr>
                       <td>{{ $loop->iteration + $kas->firstItem() - 1 }}</td>
+                      <td>{{ $item->nama }}</td>
                       <td>{{ $item->user->name }}</td>
-                      <td>{{ $item->transaksi->id }}</td>
                       <td>{{ $item->target }}</td>
                       <td>
                         <a class="btn btn-info btn-action" href="{{ route('kas.show', $item->id)}}"><i class="far fa-eye"></i></a>

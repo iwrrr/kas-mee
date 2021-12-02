@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Kas;
+use App\Models\User;
 use App\Models\Transaksi;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,6 +28,8 @@ class TransaksiFactory extends Factory
         $keuntungan = $pemasukan - $pengeluaran;
 
         return [
+            'id_kas' => Kas::factory(),
+            'id_user' => User::all()->random()->id,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
             'keuntungan' => ($keuntungan < 0) ? 0 : $keuntungan,

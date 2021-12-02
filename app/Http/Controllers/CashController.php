@@ -26,7 +26,7 @@ class CashController extends Controller
      */
     public function index()
     {
-        $this->data['kas'] = Kas::orderBy('id', 'ASC')->with('user', 'transaksi')->paginate(10);
+        $this->data['kas'] = Kas::orderBy('id', 'ASC')->with('user')->paginate(10);
 
         return view('pages.kas.index', $this->data);
     }
