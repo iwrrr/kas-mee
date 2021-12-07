@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CashController;
+use App\Http\Controllers\API\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
@@ -32,11 +33,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('transaction', [TransactionController::class, 'all']);
     Route::get('transaction/latest', [TransactionController::class, 'latest']);
-    Route::get('transaction/today', [TransactionController::class, 'todayTransaction']);
     Route::get('transaction/{id}', [TransactionController::class, 'transactionsByCash']);
+    Route::get('transaction/today/{day}', [TransactionController::class, 'todayTransaction']);
     Route::post('transaction', [TransactionController::class, 'store']);
     Route::post('transaction/{id}', [TransactionController::class, 'update']);
-    Route::delete('transaction/{id}', [TransactionController::class, 'destroy']);
+    Route::post('transaction/{id}', [TransactionController::class, 'destroy']);
 });
 
 Route::post('login', [UserController::class, 'login']);

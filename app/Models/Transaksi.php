@@ -19,9 +19,11 @@ class Transaksi extends Model
      */
     protected $fillable = [
         'id_kas',
+        'id_user',
         'pemasukan',
         'pengeluaran',
         'keuntungan',
+        'keterangan',
     ];
 
     public function kas()

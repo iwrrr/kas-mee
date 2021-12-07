@@ -28,11 +28,12 @@ class TransaksiFactory extends Factory
         $keuntungan = $pemasukan - $pengeluaran;
 
         return [
-            'id_kas' => Kas::factory(),
+            'id_kas' => Kas::all()->random()->id,
             'id_user' => User::all()->random()->id,
             'pemasukan' => $pemasukan,
             'pengeluaran' => $pengeluaran,
             'keuntungan' => ($keuntungan < 0) ? 0 : $keuntungan,
+            'keterangan' => $this->faker->text(20),
         ];
     }
 }

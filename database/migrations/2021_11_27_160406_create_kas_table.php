@@ -18,7 +18,7 @@ class CreateKasTable extends Migration
             $table->string('nama');
             $table->string('slug');
             $table->unsignedBigInteger('id_user');
-            $table->integer('target');
+            $table->bigInteger('target');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

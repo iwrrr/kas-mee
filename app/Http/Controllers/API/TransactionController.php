@@ -26,28 +26,13 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display latest transaction.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function latest(Request $request)
-    {
-        $transaction = Transaksi::where('id_user', Auth::user()->id)->latest()->take(5)->get();
-
-        return ResponseFormatter::success(
-            $transaction,
-            'Data list transaksi berhasil diambil'
-        );
-    }
-
-    /**
      * Display today transaction.
      *
      * @return \Illuminate\Http\Response
      */
-    public function todayTransaction()
+    public function todayTransaction($day)
     {
-        $transaction = Transaksi::where('id_user', Auth::user()->id)->orderBy('created_at', 'DESC')->first();
+        $transaction = Transaksi::where('id_user', Auth::user()->id)->orderBy('created_at', 'DESC')->where('created_at', 'LIKE', '%' . $day . '%')->first();
 
         return ResponseFormatter::success(
             $transaction,
@@ -67,6 +52,21 @@ class TransactionController extends Controller
         return ResponseFormatter::success(
             $transaction,
             'Data transaksi berhasil diambil'
+        );
+    }
+
+    /**
+     * Display latest transaction.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function latest(Request $request)
+    {
+        $transaction = Transaksi::where('id_user', Auth::user()->id)->latest()->take(5)->get();
+
+        return ResponseFormatter::success(
+            $transaction,
+            'Data list transaksi terbaru berhasil diambil'
         );
     }
 

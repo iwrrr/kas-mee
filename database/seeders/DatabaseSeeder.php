@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::factory(1)->create();
-        Transaksi::factory(5)->create();
+        Kas::factory(20)->create();
+        Transaksi::factory(1000)->create();
     }
 }
