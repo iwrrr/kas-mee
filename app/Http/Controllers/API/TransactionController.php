@@ -79,6 +79,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $params = $request->all();
+        $params['id_user'] = Auth::user()->id;
 
         $transaction = Transaksi::create($params);
 
@@ -98,6 +99,7 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         $params = $request->all();
+        $params['id_user'] = Auth::user()->id;
 
         $transaction = Transaksi::findOrFail($id);
 

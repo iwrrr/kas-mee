@@ -106,7 +106,6 @@ class CashController extends Controller
     public function store(Request $request)
     {
         $params = $request->all();
-
         $params['slug'] = Str::slug($params['nama']);
         $params['id_user'] = Auth::user()->id;
 
@@ -129,6 +128,7 @@ class CashController extends Controller
     {
         $params = $request->all();
         $params['slug'] = Str::slug($params['nama']);
+        $params['id_user'] = Auth::user()->id;
 
         $cash = Kas::findOrFail($id);
 
