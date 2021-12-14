@@ -22,6 +22,10 @@ class DashboardController extends Controller
         $this->data['kas'] = Kas::count();
         $this->data['transaksi'] = Transaksi::count();
 
+        $this->data['users'] = User::latest()->take(5)->get();
+        $this->data['cash'] = Kas::latest()->take(5)->get();
+        $this->data['transactions'] = Transaksi::latest()->take(5)->get();
+
         return view('pages.home', $this->data);
     }
 }

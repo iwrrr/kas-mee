@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Actions\Fortify\PasswordValidationRules;
 
 class UserController extends Controller
@@ -100,6 +101,11 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+
+        if (!$data['password']) {
+            unset($data['password']);
+        }
 
         $user = Auth::user();
         $user->update($data);

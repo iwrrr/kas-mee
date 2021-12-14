@@ -2,7 +2,7 @@
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand mb-1">
       <a href="{{ route('dashboard') }}">
-        <img src="{{ asset('assets/img/logo-with-text.svg') }}" alt="" width="200">
+        <img src="{{ asset('assets/img/logo-with-text.svg') }}" alt="" width="150">
       </a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">

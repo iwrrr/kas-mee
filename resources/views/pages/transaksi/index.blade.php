@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Transaksi
+Dashboard | Transaksi
 @endsection
 
 @section('content')

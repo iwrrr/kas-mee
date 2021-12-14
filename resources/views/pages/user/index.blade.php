@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-User
+Dashboard | User
 @endsection
 
 @section('content')
@@ -36,8 +36,6 @@ User
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone_number }}</td>
                       <td>
-                        <a class="btn btn-info btn-action" href="{{ route('user.show', $user->id)}}"><i class="far fa-eye"></i></a>
-
                         <a class="btn btn-warning btn-action" href="{{ route('user.edit', $user->id)}}"><i class="fas fa-pencil-alt"></i></a>
 
                         <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-action" data-confirm="Apakah Anda Yakin?|Tindakan ini tidak bisa dibatalkan. Apakah Anda ingin melanjutkan?"><i class="fas fa-trash"></i></a>

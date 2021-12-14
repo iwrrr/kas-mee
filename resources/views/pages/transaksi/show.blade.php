@@ -24,6 +24,14 @@ Transaksi
           <div class="card-body">
             <div class="form-row">
               <div class="col-md-2">
+                <Label>Nama Kas</Label>
+              </div>
+              <div class="col-md-10">
+                : {{ $transaksi->kas->nama }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-2">
                 <Label>Pemasukan</Label>
               </div>
               <div class="col-md-10">

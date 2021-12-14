@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Kas
+Dashboard | Kas
 @endsection
 
 @section('content')

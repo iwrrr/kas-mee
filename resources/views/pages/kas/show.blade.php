@@ -1,49 +1,49 @@
 @extends('layouts.main')
 
 @section('title')
-Transaksi
+Kas
 @endsection
 
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Transaksi</h1>
+    <h1>Kas</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></div>
-      <div class="breadcrumb-item active"><a href="{{ route('transaksi.index') }}">Manajemen Transaksi</a></div>
+      <div class="breadcrumb-item active"><a href="{{ route('kas.index') }}">Manajemen Kas</a></div>
     </div>
   </div>
   <div class="section-body">
-    <h2 class="section-title">Daftar Transaksi</h2>
+    <h2 class="section-title">Daftar Kas</h2>
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Detail Transaksi</h4>
+            <h4>Detail Kas</h4>
           </div>
           <div class="card-body">
             <div class="form-row">
               <div class="col-md-2">
-                <Label>Pemasukan</Label>
+                <Label>Nama Kas</Label>
               </div>
               <div class="col-md-10">
-                : {{ $transaksi->pemasukan }}
+                : {{ $kas->nama }}
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-2">
-                <Label>Pengeluaran</Label>
+                <Label>User</Label>
               </div>
               <div class="col-md-10">
-                : {{ $transaksi->pengeluaran }}
+                : {{ $kas->user->name }}
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-2">
-                <Label>Keuntungan</Label>
+                <Label>Target</Label>
               </div>
               <div class="col-md-10">
-                : {{ $transaksi->keuntungan }}
+                : {{ $kas->target }}
               </div>
             </div>
           </div>
