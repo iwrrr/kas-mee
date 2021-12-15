@@ -56,28 +56,44 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => $this->passwordRules()
-            ]);
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => $this->passwordRules()
+                ],
+                [
+                    'name.required' => 'Nama tidak boleh kosong',
+                    'email.required' => 'Email tidak boleh kosong',
+                    'email.unique' => 'Email telah digunakan',
+                    'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai',
+                ]
+            );
 
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'phone_number' => $request->phone_number,
-            ]);
+            if ($validator->fails()) {
+                return ResponseFormatter::error([
+                    'message' => 'Something went wrong',
+                    'error' => $validator->messages()->first(),
+                ], 'Authentication Failed', 500);
+            } else {
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'phone_number' => $request->phone_number,
+                ]);
 
-            $user = User::where('email', $request->email)->first();
+                $user = User::where('email', $request->email)->first();
 
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
+                $tokenResult = $user->createToken('authToken')->plainTextToken;
 
-            return ResponseFormatter::success([
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-                'user' => $user,
-            ]);
+                return ResponseFormatter::success([
+                    'access_token' => $tokenResult,
+                    'token_type' => 'Bearer',
+                    'user' => $user,
+                ]);
+            }
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
@@ -98,17 +114,17 @@ class UserController extends Controller
         return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UserRequest $request)
     {
-        $data = $request->all();
-        $data['password'] = Hash::make($data['password']);
-
-        if (!$data['password']) {
-            unset($data['password']);
-        }
-
+        $params = $request->validated();
         $user = Auth::user();
-        $user->update($data);
+
+        if (!$params['password']) {
+            unset($params['password']);
+        } else {
+            $params['password'] = Hash::make($params['password']);
+            $user->update($params);
+        }
 
         return ResponseFormatter::success($user, 'Profile Updated');
     }
@@ -116,7 +132,7 @@ class UserController extends Controller
     public function uploadPhoto(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'required|image|max:2048'
+            'image' => 'required|image|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -125,12 +141,19 @@ class UserController extends Controller
             ], 'Update photo fails', 401);
         }
 
-        if ($request->file('file')) {
-            $file = $request->file->store('assets/user', 'public');
+        if ($request->file('image')) {
+            $file = $request->file('image');
 
-            // Simpan url foto ke database
+            $now = date('m/d/Y H:i:s', time());
+            $out = substr(hash('md5', $now), 0, 12);
+
+            $fileName = $out . '.' . $file->getClientOriginalExtension();
+            $folder = '/uploads/user';
+            $filePath = $file->storeAs($folder, $fileName, 'public');
+
+            // // Simpan url foto ke database
             $user = Auth::user();
-            $user->profile_photo_path = $file;
+            $user->profile_photo_path = $filePath;
             $user->update();
 
             return ResponseFormatter::success($file, 'File successfully uploaded');

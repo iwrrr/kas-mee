@@ -31,12 +31,9 @@
         </div>
       </div>
 
-      <div class="row justify-content-center mt-2">
-        <div class="col-lg-2 col-md-2 col-sm-3 col-2">
-          <a href="{{ route('login') }}" class="btn btn-success btn-lg btn-block">Login</a>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-2">
-          <a href="{{ route('register') }}" class="btn btn-outline-success btn-lg btn-block">Register</a>
+      <div class="row justify-content-center mt-3">
+        <div class="col-2">
+          <a href="{{ route('login') }}" class="btn btn-success btn-lg btn-block">Login as Admin</a>
         </div>
       </div>
       

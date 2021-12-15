@@ -22,9 +22,9 @@ class CashController extends Controller
         $cash = Kas::select(
             'kas.*',
             DB::raw('
-                IFNULL(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
-                IFNULL(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
-                IFNULL(SUM(transaksi.keuntungan), 0) AS total_keuntungan
+                COALESCE(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
+                COALESCE(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
+                COALESCE(SUM(transaksi.keuntungan), 0) AS total_keuntungan
             ')
         )
             ->where('kas.id_user', Auth::user()->id)
@@ -50,9 +50,9 @@ class CashController extends Controller
         $cash = Kas::select(
             'kas.*',
             DB::raw('
-                IFNULL(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
-                IFNULL(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
-                IFNULL(SUM(transaksi.keuntungan), 0) AS total_keuntungan
+                COALESCE(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
+                COALESCE(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
+                COALESCE(SUM(transaksi.keuntungan), 0) AS total_keuntungan
             ')
         )
             ->where('kas.id_user', Auth::user()->id)
@@ -80,9 +80,9 @@ class CashController extends Controller
         $cash = Kas::select(
             'kas.*',
             DB::raw('
-                IFNULL(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
-                IFNULL(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
-                IFNULL(SUM(transaksi.keuntungan), 0) AS total_keuntungan
+                COALESCE(SUM(transaksi.pemasukan), 0) AS total_pemasukan, 
+                COALESCE(SUM(transaksi.pengeluaran), 0) AS total_pengeluaran, 
+                COALESCE(SUM(transaksi.keuntungan), 0) AS total_keuntungan
             ')
         )
             ->where('kas.id', $id)

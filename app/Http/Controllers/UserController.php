@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -61,13 +62,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         return DB::transaction(function () use ($params, $user) {
-            $params['password'] = Hash::make($params['password']);
-
             if (!$params['password']) {
                 unset($params['password']);
+            } else {
+                $params['password'] = Hash::make($params['password']);
+                $user->update($params);
             }
-
-            $user->update($params);
 
             return redirect()->route('user.index')->with('success', 'User ' . $user->name . ' berhasil diperbarui');
         });
@@ -95,6 +95,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', 'User ' . $user->name . 'berhasil dihapus');
+        return redirect()->route('user.index')->with('success', 'User ' . $user->name . ' berhasil dihapus');
     }
 }

@@ -99,3 +99,9 @@ body.sidebar-mini .main-sidebar .sidebar-menu li.active a {
 .card .card-header h4 {
     color: #32D689;
 }
+
+/* Table */
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}

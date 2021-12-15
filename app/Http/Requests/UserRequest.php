@@ -39,7 +39,7 @@ class UserRequest extends FormRequest
                 Rule::unique(User::class)->ignore($this->id),
             ],
             'phone_number' => ['required', 'string', 'max:15'],
-            'password' => $this->passwordRules(),
+            'password' => ($this->password) ? $this->passwordRules() : [],
         ];
     }
 
@@ -51,9 +51,11 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Nama tidak boleh kosong',
-            'email.unique' => 'Email telah digunakan',
-            'password.confirmed' => 'Konfirmasi password tidak sesuai'
+            'name.required' => 'Nama tidak boleh kosong.',
+            'email.unique' => 'Email telah digunakan.',
+            'phone_number.required' => 'Nomor telepon tidak boleh kosong.',
+            'password.required' => 'Kata sandi tidak boleh kosong.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai.'
         ];
     }
 }
