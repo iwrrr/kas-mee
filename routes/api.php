@@ -19,7 +19,8 @@ use App\Http\Controllers\API\UserController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
-    Route::post('user', [UserController::class, 'updateProfile']);
+    Route::put('user/{id}', [UserController::class, 'updateProfile']);
+    Route::post('user/password', [UserController::class, 'updatePassword']);
     Route::post('user/photo', [UserController::class, 'uploadPhoto']);
     Route::post('logout', [UserController::class, 'logout']);
 

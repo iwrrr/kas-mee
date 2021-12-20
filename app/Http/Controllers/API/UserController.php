@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -59,14 +60,16 @@ class UserController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'name' => ['required', 'string', 'max:255'],
-                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'name' => ['required', 'string', 'max:50'],
+                    'email' => ['required', 'string', 'email', 'max:50', 'min:10', 'unique:users'],
+                    'phone_number' => ['required', 'string', 'max:15'],
                     'password' => $this->passwordRules()
                 ],
                 [
                     'name.required' => 'Nama tidak boleh kosong',
                     'email.required' => 'Email tidak boleh kosong',
                     'email.unique' => 'Email telah digunakan',
+                    'phone_number.required' => 'Nomor telepon tidak boleh kosong',
                     'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai',
                 ]
             );
@@ -114,19 +117,52 @@ class UserController extends Controller
         return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
     }
 
-    public function updateProfile(UserRequest $request)
+    public function updateProfile(Request $request, $id)
     {
-        $params = $request->validated();
+        $params = $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:50',
+                'min:10',
+                Rule::unique(User::class)->ignore($id),
+            ],
+            'phone_number' => ['required', 'string', 'max:15']
+        ]);
+
         $user = Auth::user();
 
-        if (!$params['password']) {
-            unset($params['password']);
+        $user->update([
+            'name' => $params['name'],
+            'email' => $params['email'],
+            'phone_number' => $params['phone_number']
+        ]);
+
+        return ResponseFormatter::success($user, 'Profile Updated');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $params = $request->validate([
+            'old_password' => ['required'],
+            'password' => ['required', 'min:8', 'string'],
+            'confirm_password' => ['required', 'same:password'],
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($params['old_password'], $user->password)) {
+            return ResponseFormatter::error([
+                'message' => 'You have entered wrong password'
+            ], 'Update password fails', 401);
         } else {
             $params['password'] = Hash::make($params['password']);
             $user->update($params);
-        }
 
-        return ResponseFormatter::success($user, 'Profile Updated');
+            return ResponseFormatter::success($user, 'Password Updated');
+        }
     }
 
     public function uploadPhoto(Request $request)
